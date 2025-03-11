@@ -1,0 +1,19 @@
+kkapiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-video-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-video
+  template:
+    metadata:
+      labels:
+        app: nginx-video
+    spec:
+      containers:
+      - name: nginx
+        image: nginx-video-streaming  # Asegúrate de que este nombre coincide con la imagen cargada
+        ports:
+        - containerPort: 80
