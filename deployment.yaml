@@ -1,4 +1,4 @@
-kkapiVersion: apps/v1
+apiVersion: apps/v1  # ¡Versión de la API es obligatoria!
 kind: Deployment
 metadata:
   name: nginx-video-deployment
@@ -14,6 +14,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx-video-streaming  # Asegúrate de que este nombre coincide con la imagen cargada
+        image: nginx-video-streaming
+        imagePullPolicy: Never  # Usar la imagen local
         ports:
         - containerPort: 80
