@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Catálogo de Películas</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        h1 { color: #333; }
-        .video-list { list-style: none; padding: 0; }
-        .video-item { margin: 10px 0; }
-        .video-link { 
-            text-decoration: none; 
-            color: #0066cc; 
-            font-size: 18px;
-        }
-        .video-link:hover { text-decoration: underline; }
-    </style>
+    <title>Streaming Optimizado</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
-    <h1>Bienvenido al Catálogo de Películas</h1>
-    <ul class="video-list">
-        <li class="video-item">
-            <a class="video-link" href="/videos/video1.mp4">Película 1</a>
-        </li>
-        <li class="video-item">
-            <a class="video-link" href="/videos/video2.mp4">Película 2</a>
-        </li>
-        <li class="video-item">
-            <a class="video-link" href="/videos/video3.mp4">Película 3</a>
-        </li>
-    </ul>
+    <h1>Catálogo de Videos</h1>
+    <video id="videoPlayer" controls width="640"></video>
+    <div id="error" style="color: red;"></div>
+
+    <script>
+        const video = document.getElementById('videoPlayer');
+        const errorDiv = document.getElementById('error');
+        const videoSources = [
+            { name: "Película 1", url: "/stream/video1.m3u8" },
+        ];
+
+        // Cargar el primer video
+        function loadVideo(url) {
+            if (Hls.isSupported()) {
+                const hls = new Hls({
+                    debug: true, // Habilitar logs de depuración
+                });
+                hls.on(Hls.Events.ERROR, (event, data) => {
+                    errorDiv.textContent = `Error: ${data.type} - ${data.details}`;
+                });
+                hls.loadSource(url);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = url;
+                video.addEventListener('error', (e) => {
+                    errorDiv.textContent = "Error: El navegador no soporta HLS.";
+                });
+            }
+        }
+
+        loadVideo(videoSources[0].url);
+    </script>
 </body>
 </html>
