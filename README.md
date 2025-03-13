@@ -1,6 +1,6 @@
 # STREAMMINIKUBE
 ```bash
-minikube delete
+minikube stop
 minikube start --driver=docker
 eval $(minikube docker-env)
 docker build -t nginx-video-streaming .
