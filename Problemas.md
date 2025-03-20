@@ -23,9 +23,13 @@ Ja tenim el servei web en funcionament ens falta solucionar uns errors de la rep
 Els errors de reproduccio de video estan resolts i ara tenim tot el sistema en funcionament, ens hem adonat compte de que el rendiment es molt dolent i el volem optimitzar, pero ara ja hem de passar el seguent pas que es muntar el nostre kubernetes, per fer aixo necesitarem primer tenir en funcionament el nostre master i worker i despress ja muntarem amb docker compose el nostre o nostres servidors de pelicules.
 El problema era que a la configuracio del index.html el video que anaba a buscar tenia malament la adreça, llavors el que hem fet es automatitzar aquesta adreça i fer que cada vegade que s'inicia el docker agafi la adreça corresponent.
 
+Ara mateix estem muntant la infraestrectura i necessitem tenir muntat tot el necesari per que la xarxe estigui en funcionament correct, ens estem trobant que quan iniciem el sistema operatiu no funciona 
+
 # Ideas futuras
 Tenim ideas com millorar el procesament de mp4 i poder tenir un entorn mes autoamtitzat ja que ara quan montem el Docker necessitem entrar a dintre la maquina i enviar els videos necesaris quan en realitat podriem nomes copiar desde el principi aixo.
 Ens hem adonat compte que volem serparar els serveis de stream i els serveis web ja que ara ho tenim tot alla mateix, pero aixo ho farem mentres muntem el nostre kubernetes.
+
+Sembla que tindrem que tornar a muntar tot de nou, ja que ens esta donant molts de problemas la arrancada i el fet de haver fet canvis en el disc del sistema no ens deixa iniciar correctament el nostre servidor
 
 # Notas
 Ens hem d'enrecordar d'aprofitar la oportunitat de fer servir el nostre cdn de cloudflare i el domini de github, tambe hem de investigar si les oportunitats i advantatges que ens dona el github students es retanble.
